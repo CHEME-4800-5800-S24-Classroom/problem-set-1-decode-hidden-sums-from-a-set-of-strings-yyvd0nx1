@@ -24,7 +24,7 @@ include("Include.jl")
         @test typeof(d) == Dict{Int64,MyPuzzleRecordModel}
     end
 
-    @testset "decode_part_1 with testme_part_1.txt" begin
+    @testset "decode_part_1 with test_part_1.txt" begin
         
         # setup -
         path_to_test_file = joinpath(_PATH_TO_DATA, "test_part_1.txt");

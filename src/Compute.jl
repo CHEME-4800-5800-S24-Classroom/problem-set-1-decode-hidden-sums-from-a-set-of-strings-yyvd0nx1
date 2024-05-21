@@ -1,11 +1,10 @@
 # ===== PRIVATE METHODS BELOW HERE =================================================================================== #
 function _decode_part_1(model::MyPuzzleRecordModel)::Int64
      
-    # get the characters -
-    character = model.characters;
-    digits = filter(isnumeric, character);
+    # for this line, get the characters -
+    characters = model.characters;
+    digits = filter(isnumeric, characters);
     value = Array{Char, 1}();
-    #push to get values
     # if (length(digits) > 1)
     #     push!(value, digits[1]);
     #     push!(value, digits[end]);
@@ -17,14 +16,14 @@ function _decode_part_1(model::MyPuzzleRecordModel)::Int64
     push!(value, digits[end]);
 
 
-    # join the characters and parse the values from them
+    # join the characters and parse the value -
     return value |> join |> x-> parse(Int64, x);
 end
 
 function _decode_part_2(model::MyPuzzleRecordModel)::Int64
     
-    # we need to search for one, two, three, four, ... , nine with the numbers
-    #After this parse the value using the _decode_part_1 function
+    # we need to search for one, two, three, four, five, six, seven, eight, and nine, and replace these 
+    # with 1, 2, 3, 4, 5, 6, 7, 8, and 9, respectively.  Then we can parse the value using the _decode_part_1 function
     
     # initialize -
     record = model.record;
@@ -33,14 +32,14 @@ function _decode_part_2(model::MyPuzzleRecordModel)::Int64
         "six" => 6, "seven" => 7, "eight" => 8, 
         "nine" => 9, "zero" => 0);
 
-    # If we have a number in word form, then we add a new start and end character to the word and replace the word with the new word.  
-    # For example "seven" goes to "ssevenn". So if we had a word like "sevenine" then we would have "ssevenninee". 
-    # We then replace the word with the number.  In this example, we'd have s7n9e.
+    # let's replace the words with the numbers. If we have a number in word form, then add a new start and end character to the word
+    # and replace the word with the new word.  For example "eight" goes to "eeightt". So if we had a word like "eightwo"
+    # then we would have "eeighttwoo". We'll then replace the word with the number.  In this example, we'd have e8t2o.
     # once all the numbers are replaced, we can then use the _decode_part_1 function to parse the value
     for (word, number) in number_dictionary
         if occursin(word, record)
             
-            # replace the word with a modified variant
+            # replace the word with a modified varient -
             first_char = word[1] |> string;
             last_char = word[end] |> string;
             replacement_word = "$(first_char)$(word)$(last_char)";
@@ -48,11 +47,11 @@ function _decode_part_2(model::MyPuzzleRecordModel)::Int64
         end
     end
 
-    # update the model
+    # update the model -
     model.record = record;
     model.characters = collect(record);
 
-    # now, we can use the _decode_part_1 function to parse the value
+    # now, we can use the _decode_part_1 function to parse the value -
     return _decode_part_1(model);
 end
 

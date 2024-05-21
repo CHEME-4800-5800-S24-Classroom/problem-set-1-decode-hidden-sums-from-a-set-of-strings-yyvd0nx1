@@ -3,7 +3,13 @@
 """
     puzzleparse(filename::String) -> Dict{Int64, MyPuzzleRecordModel}
 
-TODO: Add documentation
+Parses the puzzle file and returns a dictionary of MyPuzzleRecordModel objects, where the `key` is the record number and the value is the `MyPuzzleRecordModel` object.
+
+### Arguments
+- `filename::String`: The path to the puzzle file to that we will parse.
+
+### Returns
+- A dictionary of MyPuzzleRecordModel objects, where the `key` is the record number and the value is the `MyPuzzleRecordModel` object.
 """
 function puzzleparse(filename::String)::Dict{Int64, MyPuzzleRecordModel}
     
@@ -20,7 +26,6 @@ function puzzleparse(filename::String)::Dict{Int64, MyPuzzleRecordModel}
             
             # update the line counter -
             linecounter += 1;
-
         end
     end
 
